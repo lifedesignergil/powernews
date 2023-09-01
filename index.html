@@ -56,7 +56,41 @@
                         <a href="https://lifeinstructor.net/entry/2%EA%B8%88%EC%9C%B5%EA%B6%8C-%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89-%EB%AC%B4%EC%A7%81%EC%9E%90-%EB%B9%84%EC%83%81%EA%B8%88%EB%8C%80%EC%B6%9C-%EA%B0%80%EB%8A%A5%ED%95%9C%EA%B3%B3"><img src="images/파워뉴스.jpg" alt="파워뉴스 메인" class="img-fluid"></a>
                     </div>    
                     
-                    https://lifeinstructor.net/entry/2%EA%B8%88%EC%9C%B5%EA%B6%8C-%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89-%EB%AC%B4%EC%A7%81%EC%9E%90-%EB%B9%84%EC%83%81%EA%B8%88%EB%8C%80%EC%B6%9C-%EA%B0%80%EB%8A%A5%ED%95%9C%EA%B3%B3
+                    <!-- open gragh -->
+                    <pre>
+                        <code>
+                import org.jsoup.Jsoup;
+                import org.jsoup.nodes.Document;
+                import org.jsoup.nodes.Element;
+                import org.jsoup.select.Elements;
+                
+                import java.io.IOException;
+                
+                public class OpenGraphPreview {
+                
+                    public static void main(String[] args) {
+                        String url = "https://wannafelx.com/176";
+                
+                        try {
+                            // 웹 페이지의 HTML 가져오기
+                            Document doc = Jsoup.connect(url).get();
+                
+                            // Open Graph 메타 데이터 추출
+                            Elements metaTags = doc.select("meta[property^=og:]");
+                            for (Element metaTag : metaTags) {
+                                String property = metaTag.attr("property");
+                                String content = metaTag.attr("content");
+                                System.out.println(property + ": " + content);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                        </code>
+                    </pre>
+
+
 
                      <div class="text-center mt-5">
                         <ins class="adsbygoogle"
