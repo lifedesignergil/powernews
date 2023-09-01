@@ -20,6 +20,8 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5010620288724091"
      crossorigin="anonymous"></script>
 
+     <script src="js/OG.js"></script>
+
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -56,39 +58,71 @@
                         <a href="https://lifeinstructor.net/entry/2%EA%B8%88%EC%9C%B5%EA%B6%8C-%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89-%EB%AC%B4%EC%A7%81%EC%9E%90-%EB%B9%84%EC%83%81%EA%B8%88%EB%8C%80%EC%B6%9C-%EA%B0%80%EB%8A%A5%ED%95%9C%EA%B3%B3"><img src="images/파워뉴스.jpg" alt="파워뉴스 메인" class="img-fluid"></a>
                     </div>    
                     
+
+
+
+                    
                     <!-- open gragh -->
-                    <pre>
-                        <code>
-                import org.jsoup.Jsoup;
-                import org.jsoup.nodes.Document;
-                import org.jsoup.nodes.Element;
-                import org.jsoup.select.Elements;
-                
-                import java.io.IOException;
-                
-                public class OpenGraphPreview {
-                
-                    public static void main(String[] args) {
-                        String url = "https://wannafelx.com/176";
-                
-                        try {
-                            // 웹 페이지의 HTML 가져오기
-                            Document doc = Jsoup.connect(url).get();
-                
-                            // Open Graph 메타 데이터 추출
-                            Elements metaTags = doc.select("meta[property^=og:]");
-                            for (Element metaTag : metaTags) {
-                                String property = metaTag.attr("property");
-                                String content = metaTag.attr("content");
-                                System.out.println(property + ": " + content);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    <h1>Open Graph 미리보기</h1>
+    <p>웹 페이지 URL을 입력하세요:</p>
+    <input type="text" id="urlInput" placeholder="https://wannafelx.com/176">
+    <button id="fetchButton">가져오기</button>
+
+    <div id="preview">
+        <!-- Open Graph 데이터를 여기에 표시합니다. -->
+    </div>
+
+    <script>
+        document.getElementById("fetchButton").addEventListener("click", function() {
+            var url = document.getElementById("urlInput").value;
+
+            // 입력된 URL에서 Open Graph 데이터 가져오기
+            fetchOpenGraphData(url)
+                .then(function(data) {
+                    // 데이터를 표시하는 함수 호출
+                    displayOpenGraphData(data);
+                })
+                .catch(function(error) {
+                    console.error("오류 발생:", error);
+                });
+        });
+
+        // 입력된 URL에서 Open Graph 데이터 가져오는 함수
+        function fetchOpenGraphData(url) {
+            // 서버에서 Open Graph 데이터를 가져오는 로직을 작성하세요.
+            // 이 예제에서는 외부 서버에서 데이터를 가져오는 대신 JavaScript fetch()를 사용했습니다.
+            return fetch(url)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error("네트워크 오류: " + response.statusText);
                     }
-                }
-                        </code>
-                    </pre>
+                    return response.text();
+                })
+                .then(function(html) {
+                    // HTML에서 Open Graph 메타 데이터를 추출하여 반환
+                    var openGraphData = extractOpenGraphData(html);
+                    return openGraphData;
+                });
+        }
+
+        // HTML에서 Open Graph 메타 데이터를 추출하는 함수
+        function extractOpenGraphData(html) {
+            // HTML에서 Open Graph 메타 데이터를 추출하는 로직을 작성하세요.
+            // 이 예제에서는 간단히 Open Graph 메타 데이터를 파싱하지 않았습니다.
+            // 원하는 메타 데이터를 추출하고 객체로 반환해야 합니다.
+            return {};
+        }
+
+        // Open Graph 데이터를 표시하는 함수
+        function displayOpenGraphData(data) {
+            var previewElement = document.getElementById("preview");
+            previewElement.innerHTML = "";
+
+            // Open Graph 데이터를 표시하는 로직을 작성하세요.
+            // 이 예제에서는 데이터를 JSON 형식으로 출력합니다.
+            previewElement.textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
 
 
 
